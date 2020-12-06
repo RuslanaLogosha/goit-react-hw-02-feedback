@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import s from './statistics.module.css';
 
 const Statistics = ({
   good,
@@ -7,12 +8,15 @@ const Statistics = ({
   total,
   positiveFeedbackPercentage,
 }) => (
-  <div>
-    <span> Good:{good} </span>
-    <span> Neutral:{neutral} </span>
-    <span> Bad:{bad} </span>
-    <span> Total:{total} </span>
-    <span> Positive feedback: {positiveFeedbackPercentage}% </span>
+  <div className={s.box}>
+    <span className={s.options}> Good:{good} </span>
+    <span className={s.options}> Neutral:{neutral} </span>
+    <span className={s.options}> Bad:{bad} </span>
+    <span className={s.options}> Total:{total} </span>
+    <span className={s.options}>
+      {' '}
+      Positive feedback: {positiveFeedbackPercentage}%{' '}
+    </span>
   </div>
 );
 
