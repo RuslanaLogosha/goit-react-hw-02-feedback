@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Section from './components/Section/section';
 import Statistics from './components/Statistics/statistics';
 import FeedbackOptions from './components/FeedbackOptions/feedbackOptions';
-import Notification from './components/Notification/notification';
+
+const options = ['good', 'bad', 'neutral'];
 
 class App extends Component {
   state = {
@@ -23,15 +24,14 @@ class App extends Component {
   };
 
   handleFeedback = ({ target }) => {
-    const type = target.dataset.action;
+    const { feedback } = target.dataset;
     this.setState(prevState => {
-      return { [type]: prevState[type] + 1 };
+      return { [feedback]: prevState[feedback] + 1 };
     });
   };
 
   render() {
     const { good, neutral, bad } = this.state;
-    const options = ['good', 'bad', 'neutral'];
     const totalFeedbackCount = this.countTotalFeedback();
     const positiveFeedback = this.countPositiveFeedbackPercentage();
 
@@ -44,17 +44,13 @@ class App extends Component {
           />
         </Section>
         <Section title={'Statistics'}>
-          {good || neutral || bad ? (
-            <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={totalFeedbackCount}
-              positiveFeedbackPercentage={positiveFeedback}
-            />
-          ) : (
-            <Notification message="No feedback given" />
-          )}
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={totalFeedbackCount}
+            positiveFeedbackPercentage={positiveFeedback}
+          />
         </Section>
       </>
     );
